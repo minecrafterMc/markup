@@ -1,0 +1,7 @@
+body {
+    font-size: 15pt;
+}
+.codeBlockBorder{
+    border-radius: 20px;
+    border: 3px solid black;
+}
