@@ -47,6 +47,9 @@ function convertText(str) {
         if (!configuration.includes("borderless")) {
           result += " codeBlockBorder";
         }
+        if (!configuration.includes("dontMatchBraces")) {
+          result += " match-braces";
+        }
         result +=
           "'><code class='codeBlock language-" + configuration[1] + "' ";
         result += ">";
