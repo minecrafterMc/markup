@@ -1,5 +1,6 @@
 const input = document.getElementById("textbox");
 const output = document.getElementById("out");
+const htmlOut = document.getElementById("htmlOut");
 
 function appendMarkedText(str, parent) {
   parent.innerHTML = convertText(str).replace(/(?<!\\)\|/g, "<br>");
@@ -11,8 +12,8 @@ function appendMarkedText(str, parent) {
     );
     
     Prism.highlightElement(codeBlocks[i]);
-    codeBlocks[i].innerHTML = codeBlocks[i].innerHTML.replaceAll("###[START OF TAG]###","&lt;");
-    codeBlocks[i].innerHTML = codeBlocks[i].innerHTML.replaceAll("###[END OF TAG]###","&gt;");
+    codeBlocks[i].innerHTML = codeBlocks[i].innerHTML.replaceAll("___STARTOFTAG___","&lt;");
+    codeBlocks[i].innerHTML = codeBlocks[i].innerHTML.replaceAll("___ENDOFTAG___","&gt;");
     codeBlocks[i].style.borderRadius = "20px";
   }
 }
@@ -49,7 +50,7 @@ function convertText(str) {
         result +=
           "'><code class='codeBlock language-" + configuration[1] + "' ";
         result += ">";
-        result += codeElements.replaceAll("<br>", "###[NEW LINE]###").replaceAll("<","###[START OF TAG]###").replaceAll(">","###[END OF TAG]###");
+        result += codeElements.replaceAll("<br>", "###[NEW LINE]###").replaceAll("<","___STARTOFTAG___").replaceAll(">","___ENDOFTAG___");
         result += "</code></pre>";
         codeElements = "";
         continue;
@@ -154,4 +155,5 @@ function convertText(str) {
 }
 input.addEventListener("keyup", () => {
   appendMarkedText(input.value, output);
+  htmlOut.textContent = output.innerHTML;
 });
